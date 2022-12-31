@@ -1,0 +1,59 @@
+﻿@model IEnumerable<notes_nye.Models.Note>
+
+@{
+    ViewData["Title"] = "Note Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Suck</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table class="table">
+        <tr>
+            
+            <th>
+                Title
+            </th>
+            <th>
+                Content
+            </th>
+            <th>
+                Writer
+            </th>
+            <th>
+                Tag
+            </th>
+            <th>
+                Emotion
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        
+        @foreach (var item in ViewData["notes"] as IList<notes_nye.Models.Note>)
+        {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Content
+            </td>
+            <td>
+                @item.Writer
+            </td>
+            <td>
+                @item.Tag
+            </td>
+            <td>
+                @item.Emotion
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            </tr>
+        }
+    </table>
+</div>
