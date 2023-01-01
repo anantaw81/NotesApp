@@ -4,13 +4,7 @@
 *@
 @{
     <div>
-        @if (@ViewBag.Msg != null)
-        {
-            <h4 style="color:purple">
-                <b>  @ViewBag.Msg </b> <br />
-            </h4>
-        }
-        <h1>Add a note</h1>
+        <h1>Edit A Note</h1>
         <p>Add a note here:</p>
 
         <form action="Create" method="post">
@@ -34,8 +28,8 @@
                 <label for="noteEmotion">Emotion</label>
                 <input id="noteEmotion" name="noteEmotion" type="text">
             </div>
-          <button type="submit">Add</button>
-          @Html.AntiForgeryToken()
+            <button type="submit">Add</button>
+            @Html.AntiForgeryToken()
         </form>
 
         <p><a href="/">Back home</a></p>
