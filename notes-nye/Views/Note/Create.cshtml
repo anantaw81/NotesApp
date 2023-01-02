@@ -4,37 +4,41 @@
 *@
 @{
     <div>
+        @if (@ViewBag.writerResult != null)
+        {
+            @ViewBag.writerResult[0].Name
+        }
         @if (@ViewBag.Msg != null)
         {
             <h4 style="color:purple">
                 <b>  @ViewBag.Msg </b> <br />
             </h4>
         }
-        <h1>Add a note</h1>
+        <h1>Add</h1>
         <p>Add a note here:</p>
 
         <form action="Create" method="post">
-            <div>
-                <label for="noteTitle">Title</label>
-                <input id="noteTitle" name="noteTitle" type="text">
+            <div class="mb-3" >
+                <label class="form-label" for="noteTitle">Title</label>
+                <input class="form-control" id="noteTitle" name="noteTitle" type="text">
             </div>
-            <div>
-                <label for="noteContent">Content</label>
-                <input id="noteContent" name="noteContent" type="text">
+            <div class="mb-3">
+                <label class="form-label" for="noteContent">Content</label>
+                <input class="form-control" id="noteContent" name="noteContent" type="text">
             </div>
-            <div>
-                <label for="noteContent">Writer</label>
-                <input id="noteWriter" name="noteWriter" type="text">
+            <div class="mb-3">
+                <label class="form-label" for="noteContent">Writer</label>
+                <select class="form-select" id="noteWriter" name="noteWriter" asp-items="ViewBag.Writer"></select>
             </div>
-            <div>
-                <label for="noteTag">Tag</label>
-                <input id="noteTag" name="noteTag" type="text">
+            <div class="mb-3">
+                <label class="form-label" for="noteTag">Tag</label>
+                <input class="form-control" id="noteTag" name="noteTag" type="text">
             </div>
-            <div>
-                <label for="noteEmotion">Emotion</label>
-                <input id="noteEmotion" name="noteEmotion" type="text">
+            <div class="mb-3">
+                <label class="form-label" for="noteEmotion">Emotion</label>
+                <select class="form-select" id="noteEmotion" name="noteEmotion" asp-items="ViewBag.Emotion"></select>
             </div>
-          <button type="submit">Add</button>
+          <button class="btn btn-primary" type="submit">Add</button>
           @Html.AntiForgeryToken()
         </form>
 

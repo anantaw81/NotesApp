@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using notes_nye.Data;
 using notes_nye.Models;
@@ -32,6 +33,10 @@ namespace notes_nye.Controllers
         // GET: NoteController/Create
         public ActionResult Create()
         {
+            var writerResult = dbContext.Users.OrderBy(u => u.Id).ToList();
+            var emotionResult = dbContext.Emotions.OrderBy(e => e.Id).ToList();
+            ViewBag.Writer= new SelectList(writerResult, "Id", "Name") ;
+            ViewBag.Emotion = new SelectList(emotionResult, "Id", "Name");
             return View();
         }
 
@@ -46,9 +51,9 @@ namespace notes_nye.Controllers
             Tbl.Id = idnya++;
             Tbl.Title = collection["noteTitle"];
             Tbl.Content = collection["noteContent"];
-            Tbl.Writer = collection["noteWriter"];
+            //Tbl.WriterId = collection["noteWriter"];
             Tbl.Tag = collection["noteTag"];
-            Tbl.Emotion = collection["noteEmotion"];
+            //Tbl.Emotion = collection["noteEmotion"];
 
             var notes = dbContext.Set<Note>();
             notes.Add(Tbl);
@@ -83,9 +88,9 @@ namespace notes_nye.Controllers
                 notesResult.Id = id;
                 notesResult.Title = collection["noteTitle"];
                 notesResult.Content = collection["noteContent"];
-                notesResult.Writer = collection["noteWriter"];
+                //notesResult.Writer = collection["noteWriter"];
                 notesResult.Tag = collection["noteTag"];
-                notesResult.Emotion = collection["noteEmotion"];
+                //notesResult.Emotion = collection["noteEmotion"];
                 dbContext.SaveChanges();
             }
             try

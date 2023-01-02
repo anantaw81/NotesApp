@@ -1,8 +1,9 @@
 ﻿namespace notes_nye.Models
 {
-    public class Writer
+    public class Emotion
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
