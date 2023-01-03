@@ -19,7 +19,7 @@ namespace notes_nye.Controllers
         // GET: NoteController
         public ActionResult Index()
         {
-            var notesList = dbContext.Notes.ToList();
+            var notesList = dbContext.Notes.Include(s => s.Emotion).Include(s => s.Writer).ToList();
             ViewData["notes"] = notesList;
             return View(notesList);
         }
@@ -51,9 +51,9 @@ namespace notes_nye.Controllers
             Tbl.Id = idnya++;
             Tbl.Title = collection["noteTitle"];
             Tbl.Content = collection["noteContent"];
-            //Tbl.WriterId = collection["noteWriter"];
+            Tbl.WriterId = Int32.Parse(collection["noteWriter"]);
             Tbl.Tag = collection["noteTag"];
-            //Tbl.Emotion = collection["noteEmotion"];
+            Tbl.EmotionId = Int32.Parse(collection["noteEmotion"]);
 
             var notes = dbContext.Set<Note>();
             notes.Add(Tbl);
@@ -132,7 +132,8 @@ namespace notes_nye.Controllers
         [HttpGet]
         public async Task<IActionResult> View(int id)
         {
-            var notesResult = await dbContext.Notes.FirstOrDefaultAsync(x => x.Id == id);
+            var notesResult = await dbContext.Notes.Where(s => s.Id == id).Include(s => s.Emotion).Include(s => s.Writer).FirstOrDefaultAsync();
+            //var notesResult = await dbContext.Notes.FirstOrDefaultAsync(x => x.Id == id);
             if(notesResult != null)
             {
                 return await Task.Run(() => View("View", notesResult));
@@ -143,8 +144,9 @@ namespace notes_nye.Controllers
         [HttpPost]
         public async Task<IActionResult> View(Note model)
         {
-            var notesResult = await dbContext.Notes.FindAsync(model.Id);
-            if(notesResult != null)
+            var notesResult = await dbContext.Notes.FindAsync();
+            //var notesResult = await dbContext.Notes.Where(s => s.Id == model.Id ).Include(s => s.Emotion).Include(s => s.Writer).FirstOrDefaultAsync();
+            if (notesResult != null)
             {
                 notesResult.Title = model.Title;
                 notesResult.Content = model.Content;

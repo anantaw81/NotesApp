@@ -13,6 +13,8 @@ namespace notes_nye.Models
         [ForeignKey("WriterId")]
         public User Writer { get; set; }
         public string Tag { get; set; }
+        public int EmotionId { get; set; }
+        [ForeignKey("EmotionId")]
         public Emotion Emotion { get; set; }
 
     }

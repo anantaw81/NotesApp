@@ -4,8 +4,29 @@
 @{
     ViewData["Title"] = "Note Page";
 }
-
-<div class="text-center">
+<div>
+    <div class="container-fluid">
+    <h1 class="display-6 mb-4 text-center">List of All Notes</h1>
+        <div class="row row-cols-2">
+            @foreach (var item in ViewData["notes"] as IList<notes_nye.Models.Note>)
+            {
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                            @item.Title
+                    </div>
+                    <div class="card-body">
+                            <p class="card-text">@item.Content | @item.Emotion.Name</p>
+                            <footer class="blockquote-footer">by <cite title="Source Title">@item.Writer.Name</cite> | @item.Tag </footer>
+                            <a class="btn btn-success" href="Note/View/@item.Id">Edit</a>
+                            <a class="btn btn-danger" href="Note/Delete/@item.Id">Delete</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+@*<div class="text-center">
     <h1 class="display-4">List of All Notes</h1>
     <table class="table">
         <tr>
@@ -39,22 +60,20 @@
                 @item.Content
             </td>
             <td>
-                @item.Writer
+                @item.Writer.Name
             </td>
             <td>
                 @item.Tag
             </td>
             <td>
-                @item.Emotion
+                @item.Emotion.Name
             </td>
             <td>
                 <a class="btn btn-success" href="Note/View/@item.Id">Edit</a>
                 <a class="btn btn-danger" href="Note/Delete/@item.Id">Delete</a>    
-                @*<button class="btn btn-danger">
-                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                    </button>*@
                 </td>
             </tr>
         }
     </table>
+</div>*@
 </div>
