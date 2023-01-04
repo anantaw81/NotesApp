@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>notes_nye</RootNamespace>
+    <UserSecretsId>83284275-eae6-46d9-9acd-853b92534848</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
